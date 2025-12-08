@@ -121,22 +121,39 @@ Outputs:
 
 ## 6. Output Specifications
 
-### Tables (saved in `tables/`)
-balance_psm.csv  
-matched_data_psm.csv  
-psm_result.csv  
-balance_iptw.csv  
-iptw_result.csv  
-dr_result.csv  
-tmle_result.csv  
-bayes_A_summary.csv  
-bayes_posterior_samples.csv  
-causal_results_summary.csv  
+#  Key Figures (Visual Outputs)
 
-### Figures (saved in `figures/`)
-love_plot.png  
-tmle_results.png  
-bayes_posterior.png  
+### **1. Love Plot — Covariate Balance (PSM)**
+<img src="figures/love_plot.png" width="450">
+
+---
+
+### **2. TMLE ATE Estimate (with 95% CI)**
+<img src="figures/tmle_results.png" width="450">
+
+---
+
+### **3. Bayesian Posterior Distribution (ATE)**
+<img src="figures/bayes_posterior.png" width="450">
+
+---
+
+#  Detailed CSV Results (Click to view)
+
+GitHub automatically renders CSV files in interactive table view.
+
+| Description | File |
+|------------|------|
+| PSM Balance Table | [balance_psm.csv](tables/balance_psm.csv) |
+| Matched Dataset (PSM) | [matched_data_psm.csv](tables/matched_data_psm.csv) |
+| PSM ATT Result | [psm_result.csv](tables/psm_result.csv) |
+| IPTW Balance Table | [balance_iptw.csv](tables/balance_iptw.csv) |
+| IPTW ATE Result | [iptw_result.csv](tables/iptw_result.csv) |
+| Doubly Robust Result | [dr_result.csv](tables/dr_result.csv) |
+| TMLE ATE Result | [tmle_result.csv](tables/tmle_result.csv) |
+| Bayesian Posterior Samples | [bayes_posterior_samples.csv](tables/bayes_posterior_samples.csv) |
+| Bayesian Summary | [bayes_A_summary.csv](tables/bayes_A_summary.csv) |
+| Combined Summary | [causal_results_summary.csv](tables/causal_results_summary.csv) |
 
 ---
 
