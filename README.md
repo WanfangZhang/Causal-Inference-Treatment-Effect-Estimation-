@@ -62,7 +62,6 @@ This project implements four major causal inference approaches:
 
 #  Detailed CSV Results (Click to view)
 
-GitHub automatically renders CSV files in interactive table view.
 
 | Description | File |
 |------------|------|
