@@ -40,29 +40,147 @@ This project implements four major causal inference approaches:
 
 ---
 
-#  Key Outputs
-
-## **1. Love Plot (PSM Balance Diagnostics)**
-
-> Diagnostics of covariate balance before/after matching.
-
-![Love Plot](love_plot.png)
 
 ---
 
-## **2. Bayesian ATE Posterior**
+# 📊 Key Figures (Visual Outputs)
 
-> Posterior distribution of treatment effect estimated using `brms`.
+### **1. Love Plot — Covariate Balance (PSM)**
 
-![Bayesian Posterior](bayes_posterior.png)
+![Love Plot](figures/love_plot.png)
+
+---
+
+### **2. TMLE ATE Estimate (with 95% CI)**
+
+![TMLE Results](figures/tmle_results.png)
 
 ---
 
-## **3. Summary of Treatment Effects (All Methods)**
+### **3. Bayesian Posterior Distribution (ATE)**
 
-Final combined results from PSM, IPTW, DR, TMLE, and Bayesian:
-
-📄 **[Download results table](causal_results_summary.csv)**
+![Bayesian Posterior](figures/bayes_posterior.png)
 
 ---
+
+# 📁 Detailed CSV Results (Click to view)
+
+GitHub automatically renders CSV files in interactive table view.
+
+| Description | File |
+|------------|------|
+| PSM Balance Table | [balance_psm.csv](tables/balance_psm.csv) |
+| Matched Dataset (PSM) | [matched_data_psm.csv](tables/matched_data_psm.csv) |
+| PSM ATT Result | [psm_result.csv](tables/psm_result.csv) |
+| IPTW Balance Table | [balance_iptw.csv](tables/balance_iptw.csv) |
+| IPTW ATE Result | [iptw_result.csv](tables/iptw_result.csv) |
+| Doubly Robust Result | [dr_result.csv](tables/dr_result.csv) |
+| TMLE ATE Result | [tmle_result.csv](tables/tmle_result.csv) |
+| Bayesian Posterior Samples | [bayes_posterior_samples.csv](tables/bayes_posterior_samples.csv) |
+| Bayesian Summary | [bayes_A_summary.csv](tables/bayes_A_summary.csv) |
+| Combined Summary | [causal_results_summary.csv](tables/causal_results_summary.csv) |
+
+---
+
+#  Methods Summary
+
+---
+
+## **1. Propensity Score Matching (PSM)**
+
+We estimate the propensity score:
+
+$$
+e(X) = P(A = 1 \mid X)
+$$
+
+using logistic regression and perform 1:1 nearest neighbor matching with caliper.
+
+ATT is computed as:
+
+$$
+ATT = \frac{1}{n_1} \sum_{i:A_i=1} \left( Y_i - Y_{j(i)} \right)
+$$
+
+---
+
+## **2. IPTW**
+
+Weights:
+
+- Treated  
+
+$$
+w_i = \frac{1}{e(X_i)}
+$$
+
+- Control
+
+$$
+w_i = \frac{1}{1 - e(X_i)}
+$$
+
+ATE estimator:
+
+$$
+\widehat{ATE}_{IPTW}
+= \frac{\sum_i w_i A_i Y_i}{\sum_i w_i A_i}
+- \frac{\sum_i w_i (1-A_i) Y_i}{\sum_i w_i (1-A_i)}
+$$
+
+---
+
+## **3. Doubly Robust Estimator (DR)**
+
+DR combines:
+
+- A propensity score model  
+- An outcome regression model
+
+and is consistent if **either one** is correctly specified.
+
+---
+
+## **4. Targeted Maximum Likelihood Estimation (TMLE)**
+
+TMLE updates an initial estimate $Q_0$ via a targeting step:
+
+$$
+Q^\ast = Q_0 + \epsilon H(A, X)
+$$
+
+where $H$ is the clever covariate.
+
+TMLE yields:
+
+- ATE estimate  
+- Influence curve–based standard error  
+- 95% CI  
+- p-value  
+
+---
+
+## **5. Bayesian ATE Estimation**
+
+Bayesian regression:
+
+$$
+Y \sim \beta_0 + \beta_A A + \beta_1 W_1 + \beta_2 W_2 + \epsilon
+$$
+
+Posterior inference gives:
+
+$$
+ATE_{Bayes} = E[\beta_A \mid \text{data}]
+$$
+
+We visualize:
+
+- full posterior distribution  
+- credible intervals  
+
+---
+
+
+
 
