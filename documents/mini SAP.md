@@ -123,24 +123,15 @@ Outputs:
 
 #  Key Figures (Visual Outputs)
 
-### **1. Love Plot — Covariate Balance (PSM)**
-<img src="figures/love_plot.png" width="450">
+| Description | File |
+|------------|------|
+| Love Plot — Covariate Balance (PSM) | [love_plot.png](figures/love_plot.png) |
+| TMLE ATE Estimate (with 95% CI) | [tmle_results.png](figures/tmle_results.png) |
+| Bayesian Posterior Distribution (ATE) | [bayes_posterior.png](figures/bayes_posterior.png) |
 
 ---
 
-### **2. TMLE ATE Estimate (with 95% CI)**
-<img src="figures/tmle_results.png" width="450">
-
----
-
-### **3. Bayesian Posterior Distribution (ATE)**
-<img src="figures/bayes_posterior.png" width="450">
-
----
-
-#  Detailed CSV Results (Click to view)
-
-GitHub automatically renders CSV files in interactive table view.
+#  Detailed CSV Results 
 
 | Description | File |
 |------------|------|
