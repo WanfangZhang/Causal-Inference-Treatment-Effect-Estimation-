@@ -1,5 +1,5 @@
 # Causal Inference: Treatment Effect Estimation  
-### (PSM · IPTW · Doubly Robust · TMLE · Bayesian ATE)
+### PSM · IPTW · Doubly Robust · TMLE · Bayesian ATE
 
 This project demonstrates several commonly used causal inference methods for estimating treatment effects from observational (real-world-like) data.  
 All analyses were performed using **R**, and results (plots + tables) are included in this repository.
