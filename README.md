@@ -46,20 +46,17 @@ This project implements four major causal inference approaches:
 # 📊 Key Figures (Visual Outputs)
 
 ### **1. Love Plot — Covariate Balance (PSM)**
-
-![Love Plot](figures/love_plot.png)
+<img src="figures/love_plot.png" width="450">
 
 ---
 
 ### **2. TMLE ATE Estimate (with 95% CI)**
-
-![TMLE Results](figures/tmle_results.png)
+<img src="figures/tmle_results.png" width="450">
 
 ---
 
 ### **3. Bayesian Posterior Distribution (ATE)**
-
-![Bayesian Posterior](figures/bayes_posterior.png)
+<img src="figures/bayes_posterior.png" width="450">
 
 ---
 
