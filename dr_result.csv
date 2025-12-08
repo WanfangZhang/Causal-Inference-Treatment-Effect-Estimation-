@@ -1,0 +1,2 @@
+method,estimand,estimate,std.error,p.value
+DR (weighted regression),ATE,712.7428743939919,1013.6267607239238,0.4822263190307149
