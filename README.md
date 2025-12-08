@@ -12,7 +12,7 @@ This repository is suitable for:
 
 ---
 
-## 🔍 Objectives
+##  Objectives
 
 This project implements four major causal inference approaches:
 
@@ -43,7 +43,7 @@ This project implements four major causal inference approaches:
 
 ---
 
-# 📊 Key Figures (Visual Outputs)
+#  Key Figures (Visual Outputs)
 
 ### **1. Love Plot — Covariate Balance (PSM)**
 <img src="figures/love_plot.png" width="450">
@@ -60,7 +60,7 @@ This project implements four major causal inference approaches:
 
 ---
 
-# 📁 Detailed CSV Results (Click to view)
+#  Detailed CSV Results (Click to view)
 
 GitHub automatically renders CSV files in interactive table view.
 
