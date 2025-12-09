@@ -131,7 +131,7 @@ R packages:
 MatchIt, WeightIt, survey, tmle, SuperLearner, brms, bayesplot, ggplot2, dplyr
 
 Reproducibility:
-[demo code.R](/code/demo code.R)
+[demo_code.R](/code/demo_code.R)
 
 ------------------------------------------------------------
 7. Notes
