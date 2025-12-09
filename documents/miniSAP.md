@@ -61,8 +61,7 @@ ATE estimator:
 
 $$
 ATE_{IPTW}
-= \frac{\sum_i w_i A_i Y_i}{\sum_i w_i A_i}
- - \frac{\sum_i w_i (1-A_i) Y_i}{\sum_i w_i (1-A_i)}
+= \frac{\sum_i w_i A_i Y_i}{\sum_i w_i A_i} - \frac{\sum_i w_i (1-A_i) Y_i}{\sum_i w_i (1-A_i)}
 $$
 
 Outputs:
