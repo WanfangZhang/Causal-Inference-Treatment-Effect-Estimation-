@@ -100,9 +100,9 @@ Outputs:
 
 | Description | File |
 |------------|------|
-| Love Plot — Covariate Balance (PSM) | [love_plot.png](figures/love_plot.png) |
-| TMLE ATE Estimate (with 95% CI) | [tmle_results.png](figures/tmle_results.png) |
-| Bayesian Posterior Distribution (ATE) | [bayes_posterior.png](figures/bayes_posterior.png) |
+| Love Plot — Covariate Balance (PSM) | [love_plot.png](/figures/love_plot.png) |
+| TMLE ATE Estimate (with 95% CI) | [tmle_results.png](/figures/tmle_results.png) |
+| Bayesian Posterior Distribution (ATE) | [bayes_posterior.png](/figures/bayes_posterior.png) |
 
 ---
 
@@ -110,16 +110,16 @@ Outputs:
 
 | Description | File |
 |------------|------|
-| PSM Balance Table | [balance_psm.csv](tables/balance_psm.csv) |
-| Matched Dataset (PSM) | [matched_data_psm.csv](tables/matched_data_psm.csv) |
-| PSM ATT Result | [psm_result.csv](tables/psm_result.csv) |
-| IPTW Balance Table | [balance_iptw.csv](tables/balance_iptw.csv) |
-| IPTW ATE Result | [iptw_result.csv](tables/iptw_result.csv) |
-| Doubly Robust Result | [dr_result.csv](tables/dr_result.csv) |
-| TMLE ATE Result | [tmle_result.csv](tables/tmle_result.csv) |
-| Bayesian Posterior Samples | [bayes_posterior_samples.csv](tables/bayes_posterior_samples.csv) |
-| Bayesian Summary | [bayes_A_summary.csv](tables/bayes_A_summary.csv) |
-| Combined Summary | [causal_results_summary.csv](tables/causal_results_summary.csv) |
+| PSM Balance Table | [balance_psm.csv](/tables/balance_psm.csv) |
+| Matched Dataset (PSM) | [matched_data_psm.csv](/tables/matched_data_psm.csv) |
+| PSM ATT Result | [psm_result.csv](/tables/psm_result.csv) |
+| IPTW Balance Table | [balance_iptw.csv](/tables/balance_iptw.csv) |
+| IPTW ATE Result | [iptw_result.csv](/tables/iptw_result.csv) |
+| Doubly Robust Result | [dr_result.csv](/tables/dr_result.csv) |
+| TMLE ATE Result | [tmle_result.csv](/tables/tmle_result.csv) |
+| Bayesian Posterior Samples | [bayes_posterior_samples.csv](/tables/bayes_posterior_samples.csv) |
+| Bayesian Summary | [bayes_A_summary.csv](/tables/bayes_A_summary.csv) |
+| Combined Summary | [causal_results_summary.csv](/tables/causal_results_summary.csv) |
 
 ---
 
@@ -131,7 +131,7 @@ R packages:
 MatchIt, WeightIt, survey, tmle, SuperLearner, brms, bayesplot, ggplot2, dplyr
 
 Reproducibility:
-[causal_analysis.R](code/causal_analysis.R)
+[causal_analysis.R](/code/causal_analysis.R)
 
 ------------------------------------------------------------
 7. Notes
