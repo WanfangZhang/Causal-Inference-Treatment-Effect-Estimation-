@@ -41,7 +41,7 @@ This project implements four major causal inference approaches:
 ---
 
 #  Documentation
-- [mini SAP](documents/mini_SAP.md)
+- [miniSAP](documents/miniSAP.md)
   
 
 
