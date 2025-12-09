@@ -131,7 +131,7 @@ R packages:
 MatchIt, WeightIt, survey, tmle, SuperLearner, brms, bayesplot, ggplot2, dplyr
 
 Reproducibility:
-[causal_analysis.R](/code/demo code.R)
+[demo code.R](/code/demo code.R)
 
 ------------------------------------------------------------
 7. Notes
