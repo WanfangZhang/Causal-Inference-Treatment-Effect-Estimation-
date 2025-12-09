@@ -1,125 +1,100 @@
 # Mini Statistical Analysis Plan (SAP)
-## Causal Inference: Treatment Effect Estimation
+## Causal Inference — Treatment Effect Estimation
 
-## 1. Study Overview
-This Statistical Analysis Plan (SAP) describes methods used to estimate the causal effect of a binary treatment using observational data. 
-The primary dataset is the Lalonde dataset from the MatchIt package, with simulated data used for Bayesian estimation. 
-Causal inference methods included in this analysis are:
-- Propensity Score Matching (PSM)
-- Inverse Probability of Treatment Weighting (IPTW)
-- Doubly Robust Estimator (DR)
-- Targeted Maximum Likelihood Estimation (TMLE)
-- Bayesian ATE estimation (via brms)
+Project: Causal Inference Treatment Effect Estimation  
+Code: code/causal_analysis.R  
+Data: Lalonde dataset from MatchIt; simulated dataset for Bayesian module  
 
----
+------------------------------------------------------------
+1. Objectives & Estimands
+------------------------------------------------------------
 
-## 2. Objectives
+Primary Objective:
+Estimate the Average Treatment Effect (ATE).
 
-### Primary Objective
-Estimate the Average Treatment Effect (ATE), defined as:
+Definition:
 ATE = E[Y(1)] - E[Y(0)]
 
-### Secondary Objective
-Estimate the Average Treatment Effect on the Treated (ATT):
+Secondary Objective:
+Estimate the Average Treatment Effect on the Treated (ATT).
+
+Definition:
 ATT = E[Y(1) - Y(0) | A = 1]
 
-### Sensitivity Objectives
-- Compare estimates across all methods  
-- Assess covariate balance before and after adjustments  
-- Evaluate robustness of causal conclusions  
+Sensitivity Objectives:
+- Compare estimates across PSM, IPTW, DR, TMLE, Bayesian
+- Check robustness and covariate balance
 
----
+------------------------------------------------------------
+2. Analysis Populations
+------------------------------------------------------------
 
-## 3. Analysis Populations
-- Full Analysis Set (FAS): all observations with complete data  
-- Matched Set: observations retained after PSM  
-- Weighted Population: observations with positive IPTW weights  
+Full Analysis Set (FAS):
+All observations with non-missing treatment, outcome, and covariates.
 
----
+Matched Set:
+Units retained after 1:1 nearest-neighbor matching.
 
-## 4. Variables
+Weighted Set:
+Units with valid IPTW weights (after optional trimming).
 
-### Treatment
+------------------------------------------------------------
+3. Variables
+------------------------------------------------------------
+
+Treatment:
 A (1 = treated, 0 = control)
 
-### Outcome
-Y = re78 (post-treatment income)
+Outcome:
+Y (re78)
 
-### Confounders
+Confounders:
 age, educ, black, hispan, married, nodegree, re74, re75  
-Dummy variables constructed from race.
+(dummy variables generated from race)
 
----
+------------------------------------------------------------
+4. Methods
+------------------------------------------------------------
 
-## 5. Methods
+4.1 Propensity Score Estimation  
+PS = P(A = 1 | X), estimated via logistic regression.  
+Used for matching, weighting, DR, and TMLE.
 
-### 5.1 Propensity Score Estimation
-Propensity score estimated via logistic regression:
-PS = P(A = 1 | X)
+4.2 Propensity Score Matching (PSM)
+- Nearest neighbor 1:1  
+- Caliper 0.2  
+- ATT estimated as mean(Y_treated - Y_matched_control)  
+Outputs: matched dataset, balance tables, love plot
 
----
-
-### 5.2 Propensity Score Matching (PSM)
-- 1:1 nearest neighbor matching  
-- Caliper = 0.2  
-- ATT estimator computed as mean(Y_treated - Y_matched_control)
-
-Outputs:
-- Matched dataset  
-- PSM balance summary  
-- Love plot  
-
----
-
-### 5.3 Inverse Probability of Treatment Weighting (IPTW)
+4.3 IPTW (Inverse Probability of Treatment Weighting)
 Weights:
 w = 1/PS for treated  
 w = 1/(1 - PS) for control  
 
-ATE estimated as weighted difference in mean Y.
+ATE estimated as weighted mean difference.  
+Outputs: weighted balance, IPTW estimates
+
+4.4 Doubly Robust Estimator (DR)
+Outcome regression plus IPTW weights.  
+Consistent if either PS model OR outcome model correct.  
+Output: DR estimate
+
+4.5 TMLE
+Combines outcome model (Q) and PS model (g).  
+Outputs: ATE, CI, p-value, TMLE plot
+
+4.6 Bayesian ATE (brms)
+Model:
+Y = beta0 + betaA * A + beta1 * W1 + beta2 * W2  
 
 Outputs:
-- Weighted balance summary  
-- IPTW ATE estimate  
+- posterior samples  
+- posterior summary  
+- posterior distribution plot  
 
----
-
-### 5.4 Doubly Robust Estimator (DR)
-Outcome regression model combined with PS weighting.  
-Estimator remains consistent if either the PS model OR the outcome model is correctly specified.
-
-Output:
-- DR treatment effect estimate  
-
----
-
-### 5.5 Targeted Maximum Likelihood Estimation (TMLE)
-TMLE procedure uses:
-- Initial Q model (outcome regression)
-- g model (propensity score)
-- A targeting step to update Q  
-
-Outputs include:
-- TMLE ATE estimate  
-- 95% confidence interval  
-- p-value  
-- TMLE visualization  
-
----
-
-### 5.6 Bayesian ATE Estimation
-Bayesian regression model:
-Y = beta0 + betaA * A + beta1 * W1 + beta2 * W2 + error  
-
-Outputs:
-- Posterior samples  
-- Posterior mean and SD  
-- Credible intervals  
-- Posterior distribution plot  
-
----
-
-## 6. Output Specifications
+------------------------------------------------------------
+5. Output Specifications
+------------------------------------------------------------
 
 #  Key Figures (Visual Outputs)
 
@@ -148,15 +123,19 @@ Outputs:
 
 ---
 
-## 7. Software
-Analyses conducted in R, using:
+------------------------------------------------------------
+6. Software
+------------------------------------------------------------
+
+R packages:
 MatchIt, WeightIt, survey, tmle, SuperLearner, brms, bayesplot, ggplot2, dplyr
 
-Reproducible via:
-source("code/demo code.R")
+Reproducibility:
+[causal_analysis.R](code/causal_analysis.R)
 
----
+------------------------------------------------------------
+7. Notes
+------------------------------------------------------------
 
-## 8. Notes
-This Mini SAP is a simplified demonstration of causal inference procedures used in RWE and biostatistics.
-It is intended for analysis documentation, portfolio presentation, and interview discussion.
+This Mini SAP is designed for documentation, reproducibility, and interview demonstration.  
+Its structure mirrors analysis plans used in real-world biostatistics and RWE workflows.
