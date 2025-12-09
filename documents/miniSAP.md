@@ -6,94 +6,136 @@ Code: code/demo code.R
 Data: Lalonde dataset from MatchIt; simulated dataset for Bayesian module  
 
 ------------------------------------------------------------
-1. Objectives & Estimands
+Methods
 ------------------------------------------------------------
 
-Primary Objective:
-Estimate the Average Treatment Effect (ATE).
+1 Propensity Score Estimation  
 
-Definition:
-ATE = E[Y(1)] - E[Y(0)]
+Propensity score is defined as:
 
-Secondary Objective:
-Estimate the Average Treatment Effect on the Treated (ATT).
+$$
+e(X) = P(A = 1 \mid X)
+$$
 
-Definition:
-ATT = E[Y(1) - Y(0) | A = 1]
+Estimated via logistic regression using covariates:
+(age, educ, black, hispan, married, nodegree, re74, re75).
 
-Sensitivity Objectives:
-- Compare estimates across PSM, IPTW, DR, TMLE, Bayesian
-- Check robustness and covariate balance
+Used for: matching, weighting, DR, and TMLE.
 
 ------------------------------------------------------------
-2. Analysis Populations
-------------------------------------------------------------
 
-Full Analysis Set (FAS):
-All observations with non-missing treatment, outcome, and covariates.
+2 Propensity Score Matching (PSM)
 
-Matched Set:
-Units retained after 1:1 nearest-neighbor matching.
+Matching uses nearest-neighbor 1:1 with caliper = 0.2 (logit scale).
 
-Weighted Set:
-Units with valid IPTW weights (after optional trimming).
+ATT estimator:
 
-------------------------------------------------------------
-3. Variables
-------------------------------------------------------------
+$$
+ATT = \frac{1}{n_1} \sum_{i:A_i=1} \left( Y_i - Y_{j(i)} \right)
+$$
 
-Treatment:
-A (1 = treated, 0 = control)
-
-Outcome:
-Y (re78)
-
-Confounders:
-age, educ, black, hispan, married, nodegree, re74, re75  
-(dummy variables generated from race)
+Outputs:
+- matched dataset  
+- covariate balance table  
+- Love plot  
 
 ------------------------------------------------------------
-4. Methods
-------------------------------------------------------------
 
-4.1 Propensity Score Estimation  
-PS = P(A = 1 | X), estimated via logistic regression.  
-Used for matching, weighting, DR, and TMLE.
+3 Inverse Probability of Treatment Weighting (IPTW)
 
-4.2 Propensity Score Matching (PSM)
-- Nearest neighbor 1:1  
-- Caliper 0.2  
-- ATT estimated as mean(Y_treated - Y_matched_control)  
-Outputs: matched dataset, balance tables, love plot
-
-4.3 IPTW (Inverse Probability of Treatment Weighting)
 Weights:
-w = 1/PS for treated  
-w = 1/(1 - PS) for control  
 
-ATE estimated as weighted mean difference.  
-Outputs: weighted balance, IPTW estimates
+For treated:
 
-4.4 Doubly Robust Estimator (DR)
-Outcome regression plus IPTW weights.  
-Consistent if either PS model OR outcome model correct.  
-Output: DR estimate
+$$
+w_i = \frac{1}{e(X_i)}
+$$
 
-4.5 TMLE
-Combines outcome model (Q) and PS model (g).  
-Outputs: ATE, CI, p-value, TMLE plot
+For control:
 
-4.6 Bayesian ATE (brms)
-Model:
-Y = beta0 + betaA * A + beta1 * W1 + beta2 * W2  
+$$
+w_i = \frac{1}{1 - e(X_i)}
+$$
+
+ATE estimator:
+
+$$
+ATE_{IPTW}
+= \frac{\sum_i w_i A_i Y_i}{\sum_i w_i A_i}
+ - \frac{\sum_i w_i (1-A_i) Y_i}{\sum_i w_i (1-A_i)}
+$$
+
+Outputs:
+- weighted covariate balance  
+- IPTW estimate  
+
+------------------------------------------------------------
+
+4 Doubly Robust Estimator (DR)
+
+Outcome regression:
+
+$$
+E[Y \mid A, X] = \beta_0 + \beta_A A + f(X)
+$$
+
+Estimator is consistent if **either**:
+- PS model is correct, OR  
+- outcome model is correct.
+
+DR effect estimate is the coefficient associated with \(A\), adjusted via IPTW.
+
+------------------------------------------------------------
+
+5 Targeted Maximum Likelihood Estimation (TMLE)
+
+Initial estimate:
+
+$$
+Q_0 = E[Y \mid A, X]
+$$
+
+Targeting step:
+
+$$
+Q^\* = Q_0 + \epsilon \, H(A, X)
+$$
+
+Final ATE:
+
+$$
+ATE_{TMLE} = \text{mean}\left( Q^\*(1,X) - Q^\*(0,X) \right)
+$$
+
+Outputs:
+- ATE  
+- 95% CI  
+- p-value  
+- TMLE visualization  
+
+------------------------------------------------------------
+
+6 Bayesian ATE Estimation (brms)
+
+Bayesian regression model:
+
+$$
+Y = \beta_0 + \beta_A A + \beta_1 W_1 + \beta_2 W_2 + \epsilon
+$$
+
+Posterior treatment effect:
+
+$$
+ATE_{Bayes} = E[\beta_A \mid \text{data}]
+$$
 
 Outputs:
 - posterior samples  
 - posterior summary  
-- posterior distribution plot  
+- posterior density plot  
 
 ------------------------------------------------------------
-5. Output Specifications
+Output Specifications
 ------------------------------------------------------------
 
 #  Key Figures (Visual Outputs)
@@ -124,7 +166,7 @@ Outputs:
 ---
 
 ------------------------------------------------------------
-6. Software
+Software
 ------------------------------------------------------------
 
 R packages:
@@ -134,7 +176,7 @@ Reproducibility:
 [demo_code.R](/code/demo_code.R)
 
 ------------------------------------------------------------
-7. Notes
+Notes
 ------------------------------------------------------------
 
 This Mini SAP is designed for documentation, reproducibility, and interview demonstration.  
