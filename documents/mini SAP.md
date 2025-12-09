@@ -2,7 +2,7 @@
 ## Causal Inference — Treatment Effect Estimation
 
 Project: Causal Inference Treatment Effect Estimation  
-Code: code/causal_analysis.R  
+Code: code/demo code.R  
 Data: Lalonde dataset from MatchIt; simulated dataset for Bayesian module  
 
 ------------------------------------------------------------
